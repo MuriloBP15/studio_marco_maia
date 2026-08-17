@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marco Maia Studio | Beleza & Sofisticação em Paulínia - SP</title>
+<meta name="description" content="Marco Maia Studio - Estúdio de beleza VIP em Paulínia-SP. Cabelo, maquiagem, sobrancelhas, estética facial e muito mais. Agende seu horário.">
+
+<!-- Tailwind vem direto do CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fontes usadas no site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          noir: {
+            DEFAULT: '#0B0B0B',
+            soft: '#141414',
+            card: '#181614',
+            line: '#2A2620',
+          },
+          gold: {
+            DEFAULT: '#E6B800',
+            light: '#F5C518',
+            dim: '#8A6D00',
+          },
+          silver: {
+            DEFAULT: '#D1D5DB',
+            dim: '#9CA3AF',
+          }
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          body: ['Manrope', 'sans-serif'],
+          script: ['"Alex Brush"', 'cursive'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --gold: #E6B800;
+    --gold-light: #F5C518;
+    --noir: #0B0B0B;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--noir);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* Barra de rolagem dourada */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0B0B0B; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#E6B800,#8A6D00); border-radius: 10px; }
+
+  /* Detalhe em arco usado como divisor */
+  .arch-divider {
+    width: 100%;
+    height: 46px;
+    display: block;
+  }
+
+  /* Linha dourada com o detalhe no meio */
+  .gold-rule {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(230,184,0,0.6), transparent);
+  }
+  .gold-rule::before {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 7px; height: 7px;
+    background: var(--gold-light);
+    transform: translate(-50%,-50%) rotate(45deg);
+    box-shadow: 0 0 8px rgba(245,197,24,0.7);
+  }
+
+  /* Degradê dourado dos títulos */
+  .text-gold-grad {
+    background: linear-gradient(120deg, #F5C518 0%, #E6B800 45%, #8A6D00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  /* Efeito dos cards ao passar o mouse */
+  .lux-card {
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease;
+    border: 1px solid #2A2620;
+  }
+  .lux-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(230,184,0,0.5);
+    box-shadow: 0 20px 50px -20px rgba(230,184,0,0.25);
+  }
+
+  /* Aro dos ícones dos serviços */
+  .icon-ring {
+    transition: all .4s ease;
+    border: 1px solid rgba(230,184,0,0.35);
+  }
+  .lux-card:hover .icon-ring {
+    background: rgba(230,184,0,0.1);
+    border-color: rgba(230,184,0,0.8);
+  }
+
+  /* Linha que aparece nos links do menu */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute; left: 0; bottom: -4px;
+    width: 0%; height: 1px;
+    background: var(--gold-light);
+    transition: width .35s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Brilho suave da primeira seção */
+  .hero-glow {
+    background: radial-gradient(60% 60% at 70% 30%, rgba(230,184,0,0.14) 0%, rgba(11,11,11,0) 70%);
+  }
+
+  /* Detalhe de brilho */
+  .crown-tick { filter: drop-shadow(0 0 6px rgba(245,197,24,0.5)); }
+
+  /* Animação do botão do WhatsApp */
+  .wa-pulse { position: relative; }
+  .wa-pulse::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 9999px;
+    background: #25D366;
+    opacity: .55;
+    animation: waPulse 2.2s ease-out infinite;
+  }
+  @keyframes waPulse {
+    0% { transform: scale(1); opacity: .55; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+
+  /* Elementos entram aos poucos durante o scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Estrelas das avaliações */
+  .star-gold { color: #F5C518; }
+
+  /* Efeito sobre as fotos da galeria */
+  .gal-item img { transition: transform .6s ease; }
+  .gal-item:hover img { transform: scale(1.08); }
+  .gal-overlay { opacity: 0; transition: opacity .4s ease; background: linear-gradient(180deg, rgba(11,11,11,0) 30%, rgba(11,11,11,0.92) 100%); }
+  .gal-item:hover .gal-overlay { opacity: 1; }
+
+  /* Transição dos depoimentos */
+  .t-track { transition: transform .6s cubic-bezier(.4,0,.2,1); }
+
+  /* Menu no celular */
+  .mobile-menu { transition: max-height .4s ease, opacity .3s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* Destaque para navegação pelo teclado */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #F5C518;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+
+<body class="bg-noir text-white antialiased selection:bg-gold selection:text-noir">
+
+<!-- Troque o número abaixo (formato internacional, sem espaços ou símbolos) em TODOS os links wa.me desta página -->
+<!-- Exemplo: https://wa.me/5519999999999 -->
+
+<header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background:rgba(11,11,11,0.0);">
+  <div id="headerInner" class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between transition-all duration-500 py-5">
+
+    <!-- Logo -->
+    <a href="#top" class="flex items-center gap-3 shrink-0">
+      <!-- Logo principal do studio -->
+      <img src="marco-maia-logo.png" alt="Marco Maia Studio" class="h-12 md:h-14 w-auto object-contain">
+    </a>
+
+    <!-- Menu principal -->
+    <nav class="hidden lg:flex items-center gap-10 font-body text-sm tracking-wide">
+      <a href="#sobre" class="nav-link text-silver hover:text-white transition-colors">Sobre</a>
+      <a href="#servicos" class="nav-link text-silver hover:text-white transition-colors">Serviços</a>
+      <a href="#equipe" class="nav-link text-silver hover:text-white transition-colors">Profissionais</a>
+      <a href="#depoimentos" class="nav-link text-silver hover:text-white transition-colors">Depoimentos</a>
+      <a href="#contato" class="nav-link text-silver hover:text-white transition-colors">Contato</a>
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href="https://wa.me/5519984162365?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Marco%20Maia%20Studio."
+         target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 bg-gradient-to-r from-gold-light to-gold text-noir font-semibold text-sm px-6 py-3 rounded-full hover:shadow-[0_0_25px_rgba(245,197,24,0.5)] hover:-translate-y-0.5 transition-all duration-300">
+        Agende seu Horário
+      </a>
+    </div>
+
+    <!-- Botão do menu no celular -->
+    <button id="menuBtn" aria-label="Abrir menu" aria-expanded="false" class="lg:hidden text-gold-light">
+      <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+      </svg>
+      <svg id="iconClose" class="hidden h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div id="mobileMenu" class="mobile-menu lg:hidden overflow-hidden max-h-0 opacity-0 bg-noir-soft/98 backdrop-blur-md border-t border-noir-line">
+    <nav class="flex flex-col gap-1 px-6 py-6 font-body text-base">
+      <a href="#sobre" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Sobre</a>
+      <a href="#servicos" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Serviços</a>
+      <a href="#equipe" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Profissionais</a>
+      <a href="#depoimentos" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Depoimentos</a>
+      <a href="#contato" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Contato</a>
+      <a href="https://wa.me/5519984162365?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Marco%20Maia%20Studio."
+         target="_blank" rel="noopener"
+         class="mt-4 text-center bg-gradient-to-r from-gold-light to-gold text-noir font-semibold px-6 py-3 rounded-full">
+        Agende seu Horário
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section id="top" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden hero-glow">
+  <!-- Detalhe decorativo inspirado no logo -->
+  <svg class="absolute -right-24 top-10 w-[600px] h-[600px] opacity-[0.06] pointer-events-none hidden md:block" viewBox="0 0 200 200" fill="none">
+    <path d="M20 180 V90 a30 30 0 0 1 60 0 V180" stroke="#F5C518" stroke-width="3"/>
+    <path d="M80 180 V90 a30 30 0 0 1 60 0 V180" stroke="#D1D5DB" stroke-width="3"/>
+    <path d="M140 180 V90 a30 30 0 0 1 60 0 V180" stroke="#F5C518" stroke-width="3"/>
+  </svg>
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
+
+    <div class="reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="h-px w-10 bg-gold-light"></span>
+        <span class="eyebrow uppercase text-gold-light">Paulínia · SP — Studio VIP</span>
+      </div>
+
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl leading-[1.08] font-semibold">
+        Sua beleza merece
+        <span class="block text-gold-grad italic font-medium">o brilho de uma coroa.</span>
+      </h1>
+
+      <p class="mt-7 text-silver text-lg leading-relaxed max-w-lg font-light">
+        No Marco Maia Studio, cada detalhe é pensado para revelar a versão mais sofisticada e confiante de você. Atendimento exclusivo, técnica premiada e o luxo que Paulínia merece.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <a href="https://wa.me/5519984162365?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Marco%20Maia%20Studio."
+           target="_blank" rel="noopener"
+           class="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-light to-gold text-noir font-semibold px-8 py-4 rounded-full hover:shadow-[0_0_30px_rgba(245,197,24,0.5)] hover:-translate-y-0.5 transition-all duration-300">
+          <svg class="h-5 w-5" viewBox="0 0 32 32" fill="currentColor"><path d="M16 .3C7.3.3.3 7.3.3 16c0 2.8.8 5.5 2.1 7.9L.3 31.7l8-2.1c2.3 1.3 4.9 2 7.7 2 8.7 0 15.7-7 15.7-15.7C31.7 7.3 24.7.3 16 .3zm0 28.4c-2.5 0-4.9-.7-7-1.9l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.4-2.2-2.1-4.7-2.1-7.3 0-7.3 6-13.3 13.4-13.3 3.6 0 6.9 1.4 9.4 3.9 2.5 2.5 3.9 5.9 3.9 9.4 0 7.4-6 13.4-13.3 13.4zm7.3-9.9c-.4-.2-2.4-1.2-2.7-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.5-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1-2-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.4 3.9 1.6 4.2c.2.3 2.8 4.2 6.7 5.9.9.4 1.7.6 2.3.8.9.3 1.8.2 2.4.1.7-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5z"/></svg>
+          Agendar no WhatsApp
+        </a>
+        <a href="#servicos"
+           class="inline-flex items-center justify-center gap-2 border border-silver/30 text-white px-8 py-4 rounded-full hover:border-gold-light hover:text-gold-light transition-all duration-300">
+          Ver Serviços
+        </a>
+      </div>
+
+      <div class="mt-12 flex items-center gap-8">
+        <div>
+          <p class="font-display text-3xl text-gold-light">+8</p>
+          <p class="text-xs text-silver-dim uppercase tracking-wider mt-1">Anos de Studio</p>
+        </div>
+        <div class="h-10 w-px bg-noir-line"></div>
+        <div>
+          <p class="font-display text-3xl text-gold-light">+2mil</p>
+          <p class="text-xs text-silver-dim uppercase tracking-wider mt-1">Clientes Realizadas</p>
+        </div>
+        <div class="h-10 w-px bg-noir-line"></div>
+        <div>
+          <p class="font-display text-3xl text-gold-light">5.0</p>
+          <p class="text-xs text-silver-dim uppercase tracking-wider mt-1">Avaliação Média</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal relative">
+      <div class="absolute -inset-4 border border-gold/25 rounded-[2rem] -z-10 hidden sm:block"></div>
+      <!-- Foto principal do studio -->
+      <img src="https://placehold.co/900x1100/141414/E6B800?text=INSERIR_IMAGEM_HERO&font=playfair-display"
+           alt="Cliente Marco Maia Studio" class="w-full h-[420px] sm:h-[560px] object-cover rounded-[2rem] shadow-2xl shadow-black/60">
+      <div class="absolute -bottom-6 -left-6 bg-noir-soft border border-gold/30 rounded-2xl px-6 py-4 shadow-xl hidden sm:flex items-center gap-3">
+        <svg class="h-8 w-8 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l1.6 4.9L18 8l-4.4 1.1L12 14l-1.6-4.9L6 8l4.4-1.1L12 2z"/><path d="M19 15l.8 2.3L22 18l-2.2.7L19 21l-.8-2.3L16 18l2.2-.7L19 15z"/></svg>
+        <div>
+          <p class="text-sm font-semibold text-white leading-none">Studio Premiado</p>
+          <p class="text-xs text-silver-dim mt-1">Reconhecido em Paulínia - SP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divisor -->
+<div class="max-w-7xl mx-auto px-5 md:px-8">
+  <div class="gold-rule"></div>
+</div>
+
+<section id="sobre" class="py-28 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+      <div class="reveal">
+        <span class="eyebrow uppercase text-gold-light">Sobre o Studio</span>
+        <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4 leading-tight">
+          Onde a técnica encontra a <span class="text-gold-grad italic">arte de se sentir bonita.</span>
+        </h2>
+        <p class="text-silver mt-6 leading-relaxed font-light">
+          Fundado em Paulínia - SP, o Marco Maia Studio nasceu do desejo de oferecer uma experiência de beleza verdadeiramente exclusiva: um espaço onde cada cliente é tratada como realeza, do primeiro café ao resultado final. Unimos técnicas de ponta, produtos premium e um olhar atento para os detalhes que fazem toda a diferença.
+        </p>
+        <p class="text-silver mt-4 leading-relaxed font-light">
+          Mais do que um salão, somos um santuário de autoestima — construído para revelar a beleza que já existe em você.
+        </p>
+
+        <div class="mt-10 flex items-center gap-4">
+          <img src="marco-maia-logo.png" alt="Marco Maia Studio" class="h-14 w-auto object-contain shrink-0 opacity-90">
+          <span class="font-script text-3xl text-gold-light">Marco Maia</span>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-1 gap-6 reveal">
+        <div class="lux-card bg-noir-card rounded-2xl p-8">
+          <div class="icon-ring h-12 w-12 rounded-full flex items-center justify-center mb-5">
+            <svg class="h-6 w-6 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8L12 3z"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-white">Missão</h3>
+          <p class="text-silver mt-3 text-sm leading-relaxed font-light">Elevar a autoestima de cada cliente por meio de um atendimento personalizado, técnico e genuinamente humano.</p>
+        </div>
+        <div class="lux-card bg-noir-card rounded-2xl p-8">
+          <div class="icon-ring h-12 w-12 rounded-full flex items-center justify-center mb-5">
+            <svg class="h-6 w-6 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-white">Visão</h3>
+          <p class="text-silver mt-3 text-sm leading-relaxed font-light">Ser referência em beleza e sofisticação em Paulínia, reconhecido pela excelência técnica e experiência VIP.</p>
+        </div>
+        <div class="lux-card bg-noir-card rounded-2xl p-8">
+          <div class="icon-ring h-12 w-12 rounded-full flex items-center justify-center mb-5">
+            <svg class="h-6 w-6 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-white">Valores</h3>
+          <p class="text-silver mt-3 text-sm leading-relaxed font-light">Excelência, respeito, exclusividade e o compromisso genuíno com o bem-estar de cada cliente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos" class="py-28 md:py-32 bg-noir-soft/40 border-y border-noir-line">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow uppercase text-gold-light">Nossos Serviços</span>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4">Procedimentos <span class="text-gold-grad italic">assinados com excelência</span></h2>
+      <p class="text-silver mt-5 font-light">Uma curadoria completa de serviços para realçar sua beleza em todos os detalhes.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+
+      <!-- Serviço 1 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8c0-3 3-5 8-5s8 2 8 5c0 4-3 5-3 9a3 3 0 01-6 0v-2a2 2 0 00-4 0v2a3 3 0 01-6 0c0-4 3-5 3-9z"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Cabelo & Penteados</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Cortes autorais, escovas e penteados para eventos com acabamento de alta-costura.</p>
+      </div>
+
+      <!-- Serviço 2 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M8 12a4 4 0 108 0"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Maquiagem Profissional</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Make social, noiva e editorial com produtos premium para uma pele impecável.</p>
+      </div>
+
+      <!-- Serviço 3 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15c3-6 6-8 9-8s6 2 9 8"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Design de Sobrancelhas</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Design personalizado, henna e laminação para um olhar marcante e natural.</p>
+      </div>
+
+      <!-- Serviço 4 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Estética Facial</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Limpeza de pele, hidratação e protocolos faciais para uma pele renovada e luminosa.</p>
+      </div>
+
+      <!-- Serviço 5 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 3v6M18 3v6M6 21v-6c0-3 2.5-5.5 6-8 3.5 2.5 6 5 6 8v6"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Cabelos & Coloração</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Coloração, mechas e tratamentos capilares com técnicas avançadas de preservação da fibra.</p>
+      </div>
+
+      <!-- Serviço 6 -->
+      <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
+        <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
+          <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21c0-4 2-6 5-6s5 2 5 6M9 9a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold">Manicure & Pedicure</h3>
+        <p class="text-silver text-sm mt-3 leading-relaxed font-light">Cuidado completo das mãos e pés com esmaltação em gel e nail art personalizada.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="equipe" class="py-28 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow uppercase text-gold-light">Nossa Equipe</span>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4">Profissionais que <span class="text-gold-grad italic">esculpem sua beleza</span></h2>
+      <p class="text-silver mt-5 font-light">Especialistas apaixonados por transformar autoestima em confiança visível.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-marco.png" alt="Marco Maia" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Marco Maia</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">Fundador & Hair Stylist</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">Visagismo, mechas, corte, coloração, megahair e penteados — a assinatura que dá nome ao studio.</p>
+        </div>
+      </div>
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-renata.png" alt="Renata Maia" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Renata Maia</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">CEO Marco Maia Studio</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">À frente da gestão do studio, garante que cada detalhe da experiência VIP seja impecável.</p>
+        </div>
+      </div>
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-thales.png" alt="Thales Maia" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Thales Maia</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">Hair Stylist & Barbeiro</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">Progressiva, botox, cortes femininos, tratamentos, escovas, barbearia e coloração.</p>
+        </div>
+      </div>
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-kayke.png" alt="Kayke Maia" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Kayke Maia</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">Hair Stylist</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">Mechas, botox, progressiva, coloração, tratamentos e escovas com acabamento impecável.</p>
+        </div>
+      </div>
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-isa.png" alt="Isa Falaschi" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Isa Falaschi</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">Design de Sobrancelhas & Maquiagem</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">Design de sobrancelhas, hydra gloss, brown lamination, maquiagem profissional e shine face.</p>
+        </div>
+      </div>
+
+      <div class="lux-card reveal bg-noir-card rounded-2xl overflow-hidden group">
+        <div class="relative overflow-hidden">
+          <img src="equipe-anabia.png" alt="Anabia" class="w-full h-72 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg font-semibold">Anabia</h3>
+          <p class="text-gold-light text-xs uppercase tracking-wider mt-1">Hair Stylist</p>
+          <p class="text-silver text-sm mt-3 font-light leading-relaxed">Escova, tratamentos e tranças, com um olhar especializado para todo tipo de cabelo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" class="py-28 md:py-32 bg-noir-soft/40 border-y border-noir-line overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow uppercase text-gold-light">Depoimentos</span>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4">Palavras de quem <span class="text-gold-grad italic">já viveu a experiência</span></h2>
+    </div>
+
+    <div class="relative mt-16 max-w-4xl mx-auto reveal">
+      <div class="overflow-hidden">
+        <div id="tTrack" class="t-track flex">
+
+          <div class="min-w-full px-4">
+            <div class="bg-noir-card border border-noir-line rounded-2xl p-10 text-center">
+              <div class="flex justify-center gap-1 mb-5">
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+              </div>
+              <p class="font-display italic text-xl md:text-2xl text-white leading-relaxed">"Amo o salão, todas as vezes um atendimento excepcional em todos setores e ambiente super agradável."</p>
+              <p class="text-gold-light font-semibold mt-6">Ingrid Muniz de Freitas</p>
+              <p class="text-silver-dim text-xs uppercase tracking-wider mt-1">Avaliação no Google</p>
+            </div>
+          </div>
+
+          <div class="min-w-full px-4">
+            <div class="bg-noir-card border border-noir-line rounded-2xl p-10 text-center">
+              <div class="flex justify-center gap-1 mb-5">
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+              </div>
+              <p class="font-display italic text-xl md:text-2xl text-white leading-relaxed">"O Marco Maia é um excelente profissional, só corto meu cabelo com ele. O valor está de acordo com o trabalho e o ambiente é leve e convidativo — a equipe oferece o maior conforto quando você chega no salão."</p>
+              <p class="text-gold-light font-semibold mt-6">Rafaela Sthephens</p>
+              <p class="text-silver-dim text-xs uppercase tracking-wider mt-1">Local Guide · Avaliação no Google</p>
+            </div>
+          </div>
+
+          <div class="min-w-full px-4">
+            <div class="bg-noir-card border border-noir-line rounded-2xl p-10 text-center">
+              <div class="flex justify-center gap-1 mb-5">
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+              </div>
+              <p class="font-display italic text-xl md:text-2xl text-white leading-relaxed">"Excelente atendimento e qualidade dos serviços prestados."</p>
+              <p class="text-gold-light font-semibold mt-6">Bianca Belato</p>
+              <p class="text-silver-dim text-xs uppercase tracking-wider mt-1">Avaliação no Google</p>
+            </div>
+          </div>
+
+          <div class="min-w-full px-4">
+            <div class="bg-noir-card border border-noir-line rounded-2xl p-10 text-center">
+              <div class="flex justify-center gap-1 mb-5">
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+              </div>
+              <p class="font-display italic text-xl md:text-2xl text-white leading-relaxed">"Além de ser um ambiente confortável, os funcionários são muito simpáticos e receptivos."</p>
+              <p class="text-gold-light font-semibold mt-6">Ketni Lopes</p>
+              <p class="text-silver-dim text-xs uppercase tracking-wider mt-1">Local Guide · Avaliação no Google</p>
+            </div>
+          </div>
+
+          <div class="min-w-full px-4">
+            <div class="bg-noir-card border border-noir-line rounded-2xl p-10 text-center">
+              <div class="flex justify-center gap-1 mb-5">
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+                <svg class="h-5 w-5 star-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
+              </div>
+              <p class="font-display italic text-xl md:text-2xl text-white leading-relaxed">"Excelência no atendimento e competência no trabalho proposto. Ameiiiiii"</p>
+              <p class="text-gold-light font-semibold mt-6">Marcia Rico</p>
+              <p class="text-silver-dim text-xs uppercase tracking-wider mt-1">Local Guide · Avaliação no Google</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <div class="flex items-center justify-center gap-6 mt-8">
+        <button id="tPrev" aria-label="Depoimento anterior" class="h-11 w-11 rounded-full border border-silver/30 flex items-center justify-center hover:border-gold-light hover:text-gold-light transition-colors">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div id="tDots" class="flex gap-2"></div>
+        <button id="tNext" aria-label="Próximo depoimento" class="h-11 w-11 rounded-full border border-silver/30 flex items-center justify-center hover:border-gold-light hover:text-gold-light transition-colors">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria" class="py-28 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow uppercase text-gold-light">Portfólio</span>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4">Transformações & <span class="text-gold-grad italic">o nosso espaço</span></h2>
+      <p class="text-silver mt-5 font-light">Clique em uma imagem para ampliar.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-16">
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-1.png">
+        <img src="galeria-1.png" alt="Corte e escova - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Corte & Escova</span></div>
+      </div>
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-2.png">
+        <img src="galeria-2.png" alt="Coloração e ondas - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Coloração & Babyliss</span></div>
+      </div>
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-3.png">
+        <img src="galeria-3.png" alt="Loiro iluminado - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Loiro Iluminado</span></div>
+      </div>
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-4.png">
+        <img src="galeria-4.png" alt="Balayage - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Balayage & Mechas</span></div>
+      </div>
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-5.png">
+        <img src="galeria-5.png" alt="Ondas e brilho - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Ondas & Brilho</span></div>
+      </div>
+      <div class="gal-item reveal relative rounded-xl overflow-hidden cursor-pointer aspect-[4/5]" data-full="galeria-6.png">
+        <img src="galeria-6.png" alt="Cabelo iluminado com cílios - Marco Maia Studio" class="w-full h-full object-cover">
+        <div class="gal-overlay absolute inset-0 flex items-end p-4"><span class="text-sm text-white font-medium">Design de Cílios & Cabelo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visualização ampliada da galeria -->
+<div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/95 items-center justify-center p-6">
+  <button id="lbClose" aria-label="Fechar" class="absolute top-6 right-6 text-white hover:text-gold-light">
+    <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+  <img id="lbImg" src="" alt="" class="max-h-[85vh] max-w-full rounded-lg shadow-2xl">
+</div>
+
+<section id="contato" class="py-28 md:py-32 bg-noir-soft/40 border-t border-noir-line">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-16 items-stretch">
+
+    <div class="reveal">
+      <span class="eyebrow uppercase text-gold-light">Localização & Contato</span>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold mt-4 leading-tight">Venha viver a <span class="text-gold-grad italic">experiência Marco Maia</span></h2>
+      <p class="text-silver mt-6 font-light leading-relaxed">Estamos de portas abertas para recebê-la com todo o cuidado e sofisticação que você merece.</p>
+
+      <div class="mt-10 space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="icon-ring h-11 w-11 rounded-full flex items-center justify-center shrink-0">
+            <svg class="h-5 w-5 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">Endereço</p>
+            <!-- Endereço do studio -->
+            <p class="text-silver text-sm mt-1 font-light">R. Gen. Osório, 512 — Jardim dos Calegaris, Paulínia - SP, 13140-103</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="icon-ring h-11 w-11 rounded-full flex items-center justify-center shrink-0">
+            <svg class="h-5 w-5 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">Horário de Funcionamento</p>
+            <div class="mt-2 text-sm text-silver font-light space-y-0.5">
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Segunda-feira</span><span>Fechado</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Terça-feira</span><span>09:00–19:00</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Quarta-feira</span><span>09:00–19:00</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Quinta-feira</span><span>09:00–19:00</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Sexta-feira</span><span>09:00–19:00</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Sábado</span><span>09:00–19:00</span></div>
+              <div class="flex justify-between gap-6 max-w-[220px]"><span>Domingo</span><span>Fechado</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="icon-ring h-11 w-11 rounded-full flex items-center justify-center shrink-0">
+            <svg class="h-5 w-5 text-gold-light" viewBox="0 0 32 32" fill="currentColor"><path d="M16 .3C7.3.3.3 7.3.3 16c0 2.8.8 5.5 2.1 7.9L.3 31.7l8-2.1c2.3 1.3 4.9 2 7.7 2 8.7 0 15.7-7 15.7-15.7C31.7 7.3 24.7.3 16 .3z"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">WhatsApp</p>
+            <a href="https://wa.me/5519984162365" target="_blank" rel="noopener" class="text-silver text-sm mt-1 font-light hover:text-gold-light transition-colors">(19) 98416-2365</a>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="icon-ring h-11 w-11 rounded-full flex items-center justify-center shrink-0">
+            <svg class="h-5 w-5 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">Instagram</p>
+            <a href="https://www.instagram.com/marcomaiastudioo/" target="_blank" rel="noopener" class="text-silver text-sm mt-1 font-light hover:text-gold-light transition-colors">@marcomaiastudioo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal h-full">
+      <!-- Mapa incorporado do Google Maps - Marco Maia Studio, Paulínia - SP -->
+      <div class="rounded-2xl overflow-hidden border border-noir-line h-[420px] lg:h-full">
+        <iframe
+          title="Localização Marco Maia Studio"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.2101847083954!2d-47.1568794!3d-22.7575798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8955182d94c39%3A0x349f63866a27f119!2sMarco%20Maia%20Studio%20-%20Sal%C3%A3o%20de%20Beleza%20%2F%20Cabeleireiro!5e0!3m2!1spt-BR!2sbr!4v1787002089165!5m2!1spt-BR!2sbr"
+          width="100%" height="100%"
+          class="block w-full h-full grayscale invert-[0.92] contrast-[1.1]"
+          style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="pt-20 pb-8 border-t border-noir-line">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 items-start">
+      <div class="flex flex-col gap-4">
+        <img src="marco-maia-logo.png" alt="Marco Maia Studio" class="h-16 w-auto object-contain shrink-0">
+        <p class="text-silver text-sm font-light max-w-xs">Beleza, sofisticação e autoestima em cada detalhe. Paulínia - SP.</p>
+      </div>
+
+      <nav class="flex flex-col gap-3 text-sm">
+        <span class="text-gold-light uppercase tracking-wider text-xs mb-1">Navegação</span>
+        <a href="#sobre" class="text-silver hover:text-white transition-colors w-fit">Sobre</a>
+        <a href="#servicos" class="text-silver hover:text-white transition-colors w-fit">Serviços</a>
+        <a href="#equipe" class="text-silver hover:text-white transition-colors w-fit">Profissionais</a>
+        <a href="#depoimentos" class="text-silver hover:text-white transition-colors w-fit">Depoimentos</a>
+        <a href="#contato" class="text-silver hover:text-white transition-colors w-fit">Contato</a>
+      </nav>
+
+      <div class="flex flex-col gap-3 text-sm">
+        <span class="text-gold-light uppercase tracking-wider text-xs mb-1">Redes Sociais</span>
+        <a href="https://www.instagram.com/marcomaiastudioo/" target="_blank" rel="noopener" class="text-silver hover:text-white transition-colors w-fit">Instagram — @marcomaiastudioo</a>
+        <a href="https://wa.me/5519984162365" target="_blank" rel="noopener" class="text-silver hover:text-white transition-colors w-fit">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="gold-rule my-10"></div>
+
+    <p class="text-center text-silver-dim text-xs font-light">© 2026 Marco Maia Studio — Todos os direitos reservados. Paulínia - SP.</p>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLUTUANTE ============ -->
+<a href="https://wa.me/5519984162365?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Marco%20Maia%20Studio."
+   target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp"
+   class="fixed bottom-6 right-6 z-50 h-16 w-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl shadow-black/50 wa-pulse hover:scale-105 transition-transform duration-300">
+  <svg class="h-8 w-8 text-white relative z-10" viewBox="0 0 32 32" fill="currentColor"><path d="M16 .3C7.3.3.3 7.3.3 16c0 2.8.8 5.5 2.1 7.9L.3 31.7l8-2.1c2.3 1.3 4.9 2 7.7 2 8.7 0 15.7-7 15.7-15.7C31.7 7.3 24.7.3 16 .3zm0 28.4c-2.5 0-4.9-.7-7-1.9l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.4-2.2-2.1-4.7-2.1-7.3 0-7.3 6-13.3 13.4-13.3 3.6 0 6.9 1.4 9.4 3.9 2.5 2.5 3.9 5.9 3.9 9.4 0 7.4-6 13.4-13.3 13.4zm7.3-9.9c-.4-.2-2.4-1.2-2.7-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.5-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1-2-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.4 3.9 1.6 4.2c.2.3 2.8 4.2 6.7 5.9.9.4 1.7.6 2.3.8.9.3 1.8.2 2.4.1.7-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5z"/></svg>
+</a>
+
+<script>
+  // ===== Header scroll behavior =====
+  const header = document.getElementById('header');
+  const headerInner = document.getElementById('headerInner');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.style.background = 'rgba(11,11,11,0.92)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.borderBottom = '1px solid #2A2620';
+      headerInner.classList.remove('py-5');
+      headerInner.classList.add('py-3');
+    } else {
+      header.style.background = 'rgba(11,11,11,0.0)';
+      header.style.backdropFilter = 'none';
+      header.style.borderBottom = '1px solid transparent';
+      headerInner.classList.remove('py-3');
+      headerInner.classList.add('py-5');
+    }
+  });
+
+  // ===== Mobile menu toggle =====
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+  let menuOpen = false;
+
+  function toggleMenu(force) {
+    menuOpen = force !== undefined ? force : !menuOpen;
+    if (menuOpen) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu.style.maxHeight = '0px';
+      mobileMenu.style.opacity = '0';
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+  menuBtn.addEventListener('click', () => toggleMenu());
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  // ===== Scroll reveal =====
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ===== Testimonial carousel =====
+  const track = document.getElementById('tTrack');
+  const slides = track.children.length;
+  const dotsWrap = document.getElementById('tDots');
+  let current = 0;
+
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'h-2.5 w-2.5 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-gold-light w-6' : 'bg-silver/30');
+    dot.setAttribute('aria-label', 'Ir para depoimento ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+
+  function updateDots() {
+    [...dotsWrap.children].forEach((d, i) => {
+      d.className = 'h-2.5 rounded-full transition-all duration-300 ' + (i === current ? 'bg-gold-light w-6' : 'bg-silver/30 w-2.5');
+    });
+  }
+
+  function goTo(i) {
+    current = (i + slides) % slides;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    updateDots();
+  }
+
+  document.getElementById('tPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('tNext').addEventListener('click', () => goTo(current + 1));
+
+  let autoSlide = setInterval(() => goTo(current + 1), 6000);
+  [document.getElementById('tPrev'), document.getElementById('tNext')].forEach(btn => {
+    btn.addEventListener('click', () => { clearInterval(autoSlide); autoSlide = setInterval(() => goTo(current + 1), 6000); });
+  });
+
+  // ===== Gallery lightbox =====
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  document.querySelectorAll('.gal-item').forEach(item => {
+    item.addEventListener('click', () => {
+      lbImg.src = item.dataset.full;
+      lbImg.alt = item.querySelector('img').alt;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
