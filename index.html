@@ -7,10 +7,10 @@
 <link rel="icon" href="marco-maia-logo.ico" type="image/png">
 <meta name="description" content="Marco Maia Studio - Estúdio de beleza VIP em Paulínia-SP. Cabelo, maquiagem, sobrancelhas, estética facial e muito mais. Agende seu horário.">
 
-<!-- Tailwind CSS via CDN -->
+<!-- Tailwind pelo CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Fonts: Playfair Display (display serif), Manrope (body), Alex Brush (script accent, echoes the logo's cursive "Studio") -->
+<!-- Fontes usadas no site -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
@@ -58,19 +58,19 @@
     font-family: 'Manrope', sans-serif;
   }
 
-  /* Custom gold scrollbar */
+  /* Barra de rolagem dourada */
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: #0B0B0B; }
   ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#E6B800,#8A6D00); border-radius: 10px; }
 
-  /* Arch motif — echoes the double-M arches in the logo. Used as the page's signature divider. */
+  /* Detalhe em arco usado como divisor */
   .arch-divider {
     width: 100%;
     height: 46px;
     display: block;
   }
 
-  /* Fine gold hairline with a diamond node — recurring accent */
+  /* Linha dourada com detalhe no meio */
   .gold-rule {
     position: relative;
     height: 1px;
@@ -86,7 +86,7 @@
     box-shadow: 0 0 8px rgba(245,197,24,0.7);
   }
 
-  /* Gold text gradient */
+  /* Degradê dourado dos títulos */
   .text-gold-grad {
     background: linear-gradient(120deg, #F5C518 0%, #E6B800 45%, #8A6D00 100%);
     -webkit-background-clip: text;
@@ -100,7 +100,7 @@
     font-weight: 600;
   }
 
-  /* Card hover lift with gold glow */
+  /* Efeito dos cards ao passar o mouse */
   .lux-card {
     transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease;
     border: 1px solid #2A2620;
@@ -111,7 +111,7 @@
     box-shadow: 0 20px 50px -20px rgba(230,184,0,0.25);
   }
 
-  /* Service icon ring */
+  /* Aro dos ícones dos serviços */
   .icon-ring {
     transition: all .4s ease;
     border: 1px solid rgba(230,184,0,0.35);
@@ -121,7 +121,7 @@
     border-color: rgba(230,184,0,0.8);
   }
 
-  /* Nav link underline */
+  /* Linha dos links do menu */
   .nav-link { position: relative; }
   .nav-link::after {
     content: '';
@@ -132,15 +132,15 @@
   }
   .nav-link:hover::after { width: 100%; }
 
-  /* Hero glow */
+  /* Brilho da primeira seção */
   .hero-glow {
     background: radial-gradient(60% 60% at 70% 30%, rgba(230,184,0,0.14) 0%, rgba(11,11,11,0) 70%);
   }
 
-  /* Marquee crown divider */
+  /* Detalhe de coroa */
   .crown-tick { filter: drop-shadow(0 0 6px rgba(245,197,24,0.5)); }
 
-  /* WhatsApp float pulse */
+  /* Animação do WhatsApp */
   .wa-pulse { position: relative; }
   .wa-pulse::before {
     content: '';
@@ -155,30 +155,30 @@
     100% { transform: scale(1.9); opacity: 0; }
   }
 
-  /* Reveal on scroll */
+  /* Entrada dos elementos no scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* Star rating gold */
+  /* Estrelas das avaliações */
   .star-gold { color: #F5C518; }
 
-  /* Gallery overlay */
+  /* Efeito da galeria */
   .gal-item img { transition: transform .6s ease; }
   .gal-item:hover img { transform: scale(1.08); }
   .gal-overlay { opacity: 0; transition: opacity .4s ease; background: linear-gradient(180deg, rgba(11,11,11,0) 30%, rgba(11,11,11,0.92) 100%); }
   .gal-item:hover .gal-overlay { opacity: 1; }
 
-  /* Testimonial slider */
+  /* Slider dos depoimentos */
   .t-track { transition: transform .6s cubic-bezier(.4,0,.2,1); }
 
-  /* Mobile menu */
+  /* Menu mobile */
   .mobile-menu { transition: max-height .4s ease, opacity .3s ease; }
 
   @media (prefers-reduced-motion: reduce) {
     *,*::before,*::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
 
-  /* Focus visibility for accessibility */
+  /* Foco para navegação pelo teclado */
   a:focus-visible, button:focus-visible {
     outline: 2px solid #F5C518;
     outline-offset: 3px;
@@ -188,21 +188,21 @@
 
 <body class="bg-noir text-white antialiased selection:bg-gold selection:text-noir">
 
-<!-- ============ WHATSAPP CONFIG ============ -->
-<!-- Troque o número abaixo (formato internacional, sem espaços ou símbolos) em TODOS os links wa.me desta página -->
-<!-- Exemplo: https://wa.me/5519999999999 -->
+<!-- Configuração do WhatsApp -->
+<!-- Se mudar o número, atualize também os outros links wa.me da página -->
+<!-- Exemplo de formato: 5519999999999 -->
 
-<!-- ============ HEADER ============ -->
+<!-- Cabeçalho -->
 <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background:rgba(11,11,11,0.0);">
   <div id="headerInner" class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between transition-all duration-500 py-5">
 
-    <!-- LOGO -->
+    <!-- Logo -->
     <a href="#top" class="flex items-center gap-3 shrink-0">
-      <!-- INSERIR_LOGO_MARCO_MAIA: substitua o src abaixo pelo arquivo de logo oficial em alta resolução -->
+      <!-- Logo principal -->
       <img src="marco-maia-logo.png" alt="Marco Maia Studio" class="h-12 md:h-14 w-auto object-contain">
     </a>
 
-    <!-- DESKTOP NAV -->
+    <!-- Menu principal -->
     <nav class="hidden lg:flex items-center gap-10 font-body text-sm tracking-wide">
       <a href="#sobre" class="nav-link text-silver hover:text-white transition-colors">Sobre</a>
       <a href="#servicos" class="nav-link text-silver hover:text-white transition-colors">Serviços</a>
@@ -219,7 +219,7 @@
       </a>
     </div>
 
-    <!-- MOBILE TOGGLE -->
+    <!-- Botão do menu no celular -->
     <button id="menuBtn" aria-label="Abrir menu" aria-expanded="false" class="lg:hidden text-gold-light">
       <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
@@ -230,7 +230,7 @@
     </button>
   </div>
 
-  <!-- MOBILE MENU -->
+  <!-- Menu mobile -->
   <div id="mobileMenu" class="mobile-menu lg:hidden overflow-hidden max-h-0 opacity-0 bg-noir-soft/98 backdrop-blur-md border-t border-noir-line">
     <nav class="flex flex-col gap-1 px-6 py-6 font-body text-base">
       <a href="#sobre" class="mobile-link py-3 border-b border-noir-line text-silver hover:text-gold-light transition-colors">Sobre</a>
@@ -247,9 +247,9 @@
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
+<!-- Apresentação -->
 <section id="top" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden hero-glow">
-  <!-- Ambient arch outline echoing the logo's double-M, purely decorative -->
+  <!-- Detalhe decorativo inspirado no logo -->
   <svg class="absolute -right-24 top-10 w-[600px] h-[600px] opacity-[0.06] pointer-events-none hidden md:block" viewBox="0 0 200 200" fill="none">
     <path d="M20 180 V90 a30 30 0 0 1 60 0 V180" stroke="#F5C518" stroke-width="3"/>
     <path d="M80 180 V90 a30 30 0 0 1 60 0 V180" stroke="#D1D5DB" stroke-width="3"/>
@@ -319,12 +319,12 @@
   </div>
 </section>
 
-<!-- Signature arch divider -->
+<!-- Divisor -->
 <div class="max-w-7xl mx-auto px-5 md:px-8">
   <div class="gold-rule"></div>
 </div>
 
-<!-- ============ SOBRE ============ -->
+<!-- Sobre -->
 <section id="sobre" class="py-28 md:py-32">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="grid lg:grid-cols-2 gap-16 items-start">
@@ -374,7 +374,7 @@
   </div>
 </section>
 
-<!-- ============ SERVIÇOS ============ -->
+<!-- Serviços -->
 <section id="servicos" class="py-28 md:py-32 bg-noir-soft/40 border-y border-noir-line">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="text-center max-w-2xl mx-auto reveal">
@@ -385,7 +385,7 @@
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
 
-      <!-- Card 1 -->
+      <!-- Serviço 1 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8c0-3 3-5 8-5s8 2 8 5c0 4-3 5-3 9a3 3 0 01-6 0v-2a2 2 0 00-4 0v2a3 3 0 01-6 0c0-4 3-5 3-9z"/></svg>
@@ -394,7 +394,7 @@
         <p class="text-silver text-sm mt-3 leading-relaxed font-light">Cortes autorais, escovas e penteados para eventos com acabamento de alta-costura.</p>
       </div>
 
-      <!-- Card 2 -->
+      <!-- Serviço 2 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M8 12a4 4 0 108 0"/></svg>
@@ -403,7 +403,7 @@
         <p class="text-silver text-sm mt-3 leading-relaxed font-light">Make social, noiva e editorial com produtos premium para uma pele impecável.</p>
       </div>
 
-      <!-- Card 3 -->
+      <!-- Serviço 3 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15c3-6 6-8 9-8s6 2 9 8"/></svg>
@@ -412,7 +412,7 @@
         <p class="text-silver text-sm mt-3 leading-relaxed font-light">Design personalizado, henna e laminação para um olhar marcante e natural.</p>
       </div>
 
-      <!-- Card 4 -->
+      <!-- Serviço 4 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
@@ -421,7 +421,7 @@
         <p class="text-silver text-sm mt-3 leading-relaxed font-light">Limpeza de pele, hidratação e protocolos faciais para uma pele renovada e luminosa.</p>
       </div>
 
-      <!-- Card 5 -->
+      <!-- Serviço 5 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 3v6M18 3v6M6 21v-6c0-3 2.5-5.5 6-8 3.5 2.5 6 5 6 8v6"/></svg>
@@ -430,7 +430,7 @@
         <p class="text-silver text-sm mt-3 leading-relaxed font-light">Coloração, mechas e tratamentos capilares com técnicas avançadas de preservação da fibra.</p>
       </div>
 
-      <!-- Card 6 -->
+      <!-- Serviço 6 -->
       <div class="lux-card reveal bg-noir-card rounded-2xl p-8">
         <div class="icon-ring h-14 w-14 rounded-full flex items-center justify-center mb-6">
           <svg class="h-7 w-7 text-gold-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21c0-4 2-6 5-6s5 2 5 6M9 9a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
@@ -443,7 +443,7 @@
   </div>
 </section>
 
-<!-- ============ EQUIPE ============ -->
+<!-- Equipe -->
 <section id="equipe" class="py-28 md:py-32">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="text-center max-w-2xl mx-auto reveal">
@@ -524,7 +524,7 @@
   </div>
 </section>
 
-<!-- ============ DEPOIMENTOS ============ -->
+<!-- Depoimentos -->
 <section id="depoimentos" class="py-28 md:py-32 bg-noir-soft/40 border-y border-noir-line overflow-hidden">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="text-center max-w-2xl mx-auto reveal">
@@ -614,7 +614,7 @@
         </div>
       </div>
 
-      <!-- Controls -->
+      <!-- Controles -->
       <div class="flex items-center justify-center gap-6 mt-8">
         <button id="tPrev" aria-label="Depoimento anterior" class="h-11 w-11 rounded-full border border-silver/30 flex items-center justify-center hover:border-gold-light hover:text-gold-light transition-colors">
           <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
@@ -628,7 +628,7 @@
   </div>
 </section>
 
-<!-- ============ GALERIA ============ -->
+<!-- Galeria -->
 <section id="galeria" class="py-28 md:py-32">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="text-center max-w-2xl mx-auto reveal">
@@ -666,7 +666,7 @@
   </div>
 </section>
 
-<!-- Lightbox -->
+<!-- Visualização ampliada -->
 <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/95 items-center justify-center p-6">
   <button id="lbClose" aria-label="Fechar" class="absolute top-6 right-6 text-white hover:text-gold-light">
     <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -674,7 +674,7 @@
   <img id="lbImg" src="" alt="" class="max-h-[85vh] max-w-full rounded-lg shadow-2xl">
 </div>
 
-<!-- ============ LOCALIZAÇÃO / CONTATO ============ -->
+<!-- Localização e contato -->
 <section id="contato" class="py-28 md:py-32 bg-noir-soft/40 border-t border-noir-line">
   <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-16 items-stretch">
 
@@ -690,7 +690,7 @@
           </div>
           <div>
             <p class="font-semibold text-white">Endereço</p>
-            <!-- Substitua pelo endereço completo real do estúdio -->
+            <!-- Endereço do studio -->
             <p class="text-silver text-sm mt-1 font-light">R. Gen. Osório, 512 — Jardim dos Calegaris, Paulínia - SP, 13140-103</p>
           </div>
         </div>
@@ -736,7 +736,7 @@
     </div>
 
     <div class="reveal h-full">
-      <!-- Mapa incorporado do Google Maps - Marco Maia Studio, Paulínia - SP -->
+      <!-- Mapa do studio -->
       <div class="rounded-2xl overflow-hidden border border-noir-line h-[420px] lg:h-full">
         <iframe
           title="Localização Marco Maia Studio"
@@ -750,7 +750,7 @@
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- Rodapé -->
 <footer class="pt-20 pb-8 border-t border-noir-line">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="grid md:grid-cols-3 gap-10 items-start">
@@ -781,7 +781,7 @@
   </div>
 </footer>
 
-<!-- ============ WHATSAPP FLUTUANTE ============ -->
+<!-- Botão flutuante do WhatsApp -->
 <a href="https://wa.me/5519984162365?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Marco%20Maia%20Studio."
    target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp"
    class="fixed bottom-6 right-6 z-50 h-16 w-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl shadow-black/50 wa-pulse hover:scale-105 transition-transform duration-300">
